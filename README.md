@@ -1,6 +1,7 @@
 
 # Rebuttal to Review #213830:
 Thank you for your review.
+
 1.To clearly express the differences between attention mechanism and rejection mechanism, we take the chain graph (i.e., node0->node1->node2->node3) as an example (the same with the example showed in Figure 2 in our paper).
 For the attention mechanism, because node1 contains only one neighbor (i.e., node0), no matter what the features of node0 and node1 are, the attention weight of node0 to node1 is always 1. This means when the messages with attentions propagation layer by layer, the influence of node0 to node3 is always weighted by 1 (i.e., 1*1*1=1), and the distant node0 cannot be punished. Attention mechanism is a node-wise operation, and the message passing of distant node (e.g., node0) is mainly depended on the adjacency node (e.g., node1) rather than the embedding node (e.g., node3).  Thus, the feature of distant node can be more likely to pass to the embedding node. Actually, attention mechanism can be taken as a bias based random walk, which will also coverage to a stationary distribution and has over-smoothing problem [1].
 While, compared with attention mechanism, the rejection mechanism is a layer-wise operation and the message of distant node (i.e., node0) must be punished. When the messages with rejection mechanism propagate layer by layer, the influence of node0 to node3 is always weighted by c^(1)c^(2)c^(3) (a small value), which can well solve the over-smoothing problem.  
@@ -40,6 +41,7 @@ Again, we are sincere to say sorry for our mistakes. Here, we provide the result
 
 # Rebuttal to Review #252757:
 First of all, thank you for your review.
+
 1.Thank you for your advice about the improvement of our paper, 1) The motivation of Section 3 “Limitation of Current GNNs” introduced in our paper is to emphasize the limitation of GNNs, and give a friendly understanding of this limitation and the motivation of our paper. There may exist a better way to put this section in a more suitable position. We will polish this content and give a deeper insight to GNNs. 2) The details about experimental setting can be found in the following answering about your four questions, and we will cite these four papers you mentioned in rebuttal.
 
 Here are four answers about your four questions.
@@ -83,8 +85,11 @@ On the other hand, according to the Section 4.1 in [3], compared with other aggr
 7.Thank you for your advice on writing, we will polish it in the later version.
 
 [1] https://github.com/tkipf/gcn/blob/master/gcn/utils.py  (the official code of GCN)
+
 [2] https://github.com/tkipf/gcn/tree/master/gcn/data (the official code of GCN)
+
 [3] K. Xu, C. Li, Y. Tian, T. Sonobe, K. Kawarabayashi, and S. Jegelka, Representation Learning on Graphs with Jumping Knowledge Networks, in ICML 2018.
+
 [4] Q. Li, Z. Han, X.-M. Wu, Deeper Insights into Graph Convolutional Networks for Semi-Supervised Learning, in AAAI 2018.
 
 
@@ -103,6 +108,7 @@ First of all, thank you for your review.
 4.Yes. For k-th layer, t-th hop, there has been a penalty parameter, i.e., c^(k,t). At each layer, there may have different kinds of kernels which represent different speeds of massage passing. Hence, different penalty parameters in each layer for different hops are needed.
 
 [1] M. Henaff, J. Bruna, and Y. Lecun. Deep convolutional networks on graph-structured data. CoRR, abs/1506.05163, 2015.
+
 [2] M. Defferrard, X. Bresson, and P. Vandergheynst. Convolutional neural networks on graphs with fast localized spectral filtering. In NIPS, 2016. 
 
 

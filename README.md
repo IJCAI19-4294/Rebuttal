@@ -7,15 +7,18 @@ For the attention mechanism, because node1 contains only one neighbor (i.e., nod
 While, compared with attention mechanism, the rejection mechanism is a layer-wise operation and the message of distant node (i.e., node0) must be punished. When the messages with rejection mechanism propagate layer by layer, the influence of node0 to node3 is always weighted by c^(1)c^(2)c^(3) (a small value), which can well solve the over-smoothing problem.  
 
 
-2.It is true that, overall, Citeseer contains 3327 nodes. But, among 3327 nodes, there are 15 isolated nodes (seeing Line 61-62 in [2]), and these isolated nodes have no label information (seeing Line 67-69 in [2], where the label vector of isolated node in “ty_extended” is initialized as a zero vector). (代码)
+2.It is true that, overall, Citeseer contains 3327 nodes. But, among 3327 nodes, there are 15 isolated nodes (seeing Line 61-62 in [2]), and these isolated nodes have no label information (seeing Line 67-69 in [2], where the label vector of isolated node in “ty_extended” is initialized as a zero vector). 
 Although GAT paper reports there has 3327 nodes in Citeseer. Actually, the nodes used in GAT paper is 1620 (i.e., \#train 120+\#val 500+\#test 1000). Furthermore, none of them (i.e., 1620 nodes) is isolated node (seeing Line 56-57 and Line 78-80 in [2], where “test_idx_range”, “range(len(y))” and “range(len(y), len(y)+500)” do not contain the ids of isolated nodes).
 Thus, we also ignore the isolated nodes, and use the left 3312 nodes (which are reported in our paper) as train, val and test nodes. Because the ignored nodes are isolated, the number of edges reported in our paper is still 4,732 (the same with GAT paper).  
 
 3.The main reason for the difference of accuracy of GAT on Cora between our paper and GAT paper is the different experimental setting. For example, the embedding dimension (16 dimension in our paper, and 64 dimension in GAT paper), and the way of data split strategy (3312 nodes used in our paper and 1620 nodes used in GAT paper) influence the accuracy. Actually, there are many works that adopt a different setting with GAT paper, and report different results with GAT paper (e.g., the paper [1]). We think a more important thing is keeping the experiments setting the same among all methods (including baselines and the proposed method) used in one paper rather than across papers.
 
 4.As for the accuracy on Citeseer reported in our paper, we are sincere to say sorry for our mistakes. Specifically, as mentioned before, we try to report the results of the non-isolated nodes in Citeseer, and we modify the “load_data” function in [2]. But we mismatch the node feature and the corresponding node labels after deleting the isolated nodes. Thus, there has a huge gap in results. For other datasets, there have no isolated nodes (without deleting nodes and re-matching). Thus, the results are corrected and similar with the results reported in other papers.
+
 Some evidences can be helpful to verify what we say. 
+
 1)The node number (i.e., 3312) of Citeseer reported in our paper is the number referred to the non-isolated nodes.
+
 2)Due to no isolated nodes in other datasets, there has no addition operation (e.g., deleting and re-matching) in these datasets. Thus, the results of other datasets are similar with the results published in other papers.
 
 Again, we are sincere to say sorry for our mistakes. Here, we provide the results of Citeseer on Table 2 and Table 3 in our paper, which are obtained from the corrected code after rerunning.
@@ -47,9 +50,13 @@ First of all, thank you for your review.
 Here are four answers about your four questions.
 
 1.For the first question, the accuracy on Citeseer reported in our paper, we are sincere to say sorry for our mistakes. Specifically, for the datasets of Citeseer, there are 12 isolated nodes (seeing Line 57-66 in [1]), and the labels of all the isolated nodes are not provided (seeing Line 64-66 in [1], where the label vector of isolated node in “ty_extended” is initialized as a zero vector). In GCN paper or GAT paper, both of them only use 1620 nodes, and ignore the isolated nodes. Thus, we also try to report the results of the non-isolated nodes in Citeseer (total number is 3312=3327-15), and we modify the “load_data” function in [1]. But we mismatch the node feature and the corresponding node labels after deleting the isolated nodes. Thus, there has a huge gap in results.  For other datasets, there has no isolated nodes, and the results are corrected and similar with the results reported in other papers.	
+
 Some evidences can be helpful to verify what we say. 
+
 1)The node number (i.e., 3312) of Citeseer reported in our paper is the number referred to the non-isolated nodes.
+
 2)Due to no isolated nodes in other datasets, there has no addition operation (e.g., deleting and re-matching) in these datasets. Thus, the results of other datasets are similar with the results published in other papers.
+
 Again, we are sincere to say sorry for our mistakes. Here, we provide the results of Citeseer on Table 2 and Table 3 in our paper, which are obtained from the corrected code after rerunning.
 
 |Table 2 | Citeseer |
@@ -97,9 +104,13 @@ On the other hand, according to the Section 4.1 in [3], compared with other aggr
 First of all, thank you for your review.
 
 1.For the first question, first of all, we totally agree with you that replacing the single constant by a vector may be more adaptive. Here are some reasons that why we use a single constant:
+
 1)Weighting a vector by a single constant may be a common idea used in deep learning. Taking the attention mechanism as an example, each vector is also weighted by a single constant.
+
 2)A single constant, compared with a vector, is simpler. Considering that a single constant can also well solve the over-smoothing problem, there may be no need to extend to a vector. 
+
 3) Introducing a vector rather a single constant may be more likely to have over-fitting problem. 
+
 4)A single constant has a better interpretability. In other words, the single constant can be taking as a layer-wise punishment strategy where each node is taken as the smallest unit. While, for vector-based methods, the smallest unit is the feature value in each dimension, which mixes the node feature passing in a GNN and losses the interpretability, i.e., the layer-wise punishment.
 
 2.For the second question, first of all, we are sorry to make you confused about our model explanation. The red arrows in Figure 1 refer to the short cut strategy or COMBIN used in GraphDRej or other GNNs, i.e., the Equation (2) or (10) where we need to feed COMBIN with the vectors directly from the previous layer.

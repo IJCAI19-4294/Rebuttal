@@ -1,4 +1,3 @@
-# Rebuttal
 
 # Rebuttal to Review #213830:
 Thank you for your review.
@@ -17,7 +16,8 @@ Thus, we also ignore the isolated nodes, and use the left 3312 nodes (which are 
 Some evidences can be helpful to verify what we say. 
 1)	The node number (i.e., 3312) of Citeseer reported in our paper is the number referred to the non-isolated nodes.
 2)	Due to no isolated nodes in other datasets, there has no addition operation (e.g., deleting and re-matching) in these datasets. Thus, the results of other datasets are similar with the results published in other papers.
-Again, we are sincere to say sorry for our mistakes. Here, we provide the results of Citeseer on Table 2 and Table 3 in our paper, which are obtained from the corrected code after rerunning. 
+Again, we are sincere to say sorry for our mistakes. Here, we provide the results of Citeseer on Table 2 and Table 3 in our paper, which are obtained from the corrected code after rerunning.
+
 ------------------
 Table 2  Citeseer
 GraphSGAE 71.00 
@@ -25,7 +25,6 @@ GCN		  71.90
 GAT		  70.85 
 JK		  71.53 
 GraphDRej  72.58 
---------------------
 ------------------
 Table 3  Citeseer
 GraphSGAE 71.00 
@@ -53,7 +52,6 @@ GCN		  71.90
 GAT		  70.85 
 JK		  71.53 
 GraphDRej  72.58 
---------------------
 ------------------
 Table 3  Citeseer
 GraphSGAE 71.00 

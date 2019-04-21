@@ -7,7 +7,7 @@ While, compared with attention mechanism, the rejection mechanism is a layer-wis
 
 
 2. It is true that, overall, Citeseer contains 3327 nodes. But, among 3327 nodes, there are 15 isolated nodes (seeing Line 61-62 in [2]), and these isolated nodes have no label information (seeing Line 67-69 in [2], where the label vector of isolated node in “ty_extended” is initialized as a zero vector). (代码)
-Although GAT paper reports there has 3327 nodes in Citeseer. Actually, the nodes used in GAT paper is 1620 (i.e., #train 120+#val 500+#test 1000). Furthermore, none of them (i.e., 1620 nodes) is isolated node (seeing Line 56-57 and Line 78-80 in [2], where “test_idx_range”, “range(len(y))” and “range(len(y), len(y)+500)” do not contain the ids of isolated nodes).
+Although GAT paper reports there has 3327 nodes in Citeseer. Actually, the nodes used in GAT paper is 1620 (i.e., \#train 120+\#val 500+\#test 1000). Furthermore, none of them (i.e., 1620 nodes) is isolated node (seeing Line 56-57 and Line 78-80 in [2], where “test_idx_range”, “range(len(y))” and “range(len(y), len(y)+500)” do not contain the ids of isolated nodes).
 Thus, we also ignore the isolated nodes, and use the left 3312 nodes (which are reported in our paper) as train, val and test nodes. Because the ignored nodes are isolated, the number of edges reported in our paper is still 4,732 (the same with GAT paper).  
 
 3.The main reason for the difference of accuracy of GAT on Cora between our paper and GAT paper is the different experimental setting. For example, the embedding dimension (16 dimension in our paper, and 64 dimension in GAT paper), and the way of data split strategy (3312 nodes used in our paper and 1620 nodes used in GAT paper) influence the accuracy. Actually, there are many works that adopt a different setting with GAT paper, and report different results with GAT paper (e.g., the paper [1]). We think a more important thing is keeping the experiments setting the same among all methods (including baselines and the proposed method) used in one paper rather than across papers.
@@ -16,23 +16,24 @@ Thus, we also ignore the isolated nodes, and use the left 3312 nodes (which are 
 Some evidences can be helpful to verify what we say. 
 1)	The node number (i.e., 3312) of Citeseer reported in our paper is the number referred to the non-isolated nodes.
 2)	Due to no isolated nodes in other datasets, there has no addition operation (e.g., deleting and re-matching) in these datasets. Thus, the results of other datasets are similar with the results published in other papers.
+
 Again, we are sincere to say sorry for our mistakes. Here, we provide the results of Citeseer on Table 2 and Table 3 in our paper, which are obtained from the corrected code after rerunning.
 
-------------------
 Table 2  Citeseer
 GraphSGAE 71.00 
 GCN		  71.90  
 GAT		  70.85 
 JK		  71.53 
 GraphDRej  72.58 
-------------------
+
+
 Table 3  Citeseer
 GraphSGAE 71.00 
 GCN		  71.90  
 GAT		  70.92  
 JK		  72.20 
 GraphDRej  72.58 
---------------------
+
 
 
 # Rebuttal to Review #252757:
@@ -45,21 +46,23 @@ Some evidences can be helpful to verify what we say.
 1)The node number (i.e., 3312) of Citeseer reported in our paper is the number referred to the non-isolated nodes.
 2)Due to no isolated nodes in other datasets, there has no addition operation (e.g., deleting and re-matching) in these datasets. Thus, the results of other datasets are similar with the results published in other papers.
 Again, we are sincere to say sorry for our mistakes. Here, we provide the results of Citeseer on Table 2 and Table 3 in our paper, which are obtained from the corrected code after rerunning.
-------------------
+
+
 Table 2  Citeseer
 GraphSGAE 71.00 
 GCN		  71.90  
 GAT		  70.85 
 JK		  71.53 
 GraphDRej  72.58 
-------------------
+
+
 Table 3  Citeseer
 GraphSGAE 71.00 
 GCN		  71.90  
 GAT		  70.92  
 JK		  72.20 
 GraphDRej  72.58 
---------------------
+
 
 2.	For the second question, we randomly select 20% nodes from the rest non-isolated nodes (i.e., 3312 nodes) as training nodes. Due to the randomly sampling, the labeling rate per class is also the same (i.e., 20% per class).  We only use 20% nodes for training. We are sorry we cannot catch the meaning of the question “Do all nodes including unlabeled nodes used for training?”. Here are some explanations which may be helpful. For the unlabeled nodes, on the one hand, as we delete the isolated nodes (i.e., unlabeled nodes), there are no unlabeled nodes left in training set. On the other hand, due to randomly sampling, there may exist a case where there may be no training samples for one particular class, and it may be ok to ignore this problem as we report the mean results through several different random seeds.
 

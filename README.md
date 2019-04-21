@@ -95,6 +95,7 @@ On the other hand, according to the Section 4.1 in [3], compared with other aggr
 
 # Rebuttal to Review #255415
 First of all, thank you for your review.
+
 1.For the first question, first of all, we totally agree with you that replacing the single constant by a vector may be more adaptive. Here are some reasons that why we use a single constant:
 1)Weighting a vector by a single constant may be a common idea used in deep learning. Taking the attention mechanism as an example, each vector is also weighted by a single constant.
 2)A single constant, compared with a vector, is simpler. Considering that a single constant can also well solve the over-smoothing problem, there may be no need to extend to a vector. 

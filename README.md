@@ -19,20 +19,22 @@ Some evidences can be helpful to verify what we say.
 
 Again, we are sincere to say sorry for our mistakes. Here, we provide the results of Citeseer on Table 2 and Table 3 in our paper, which are obtained from the corrected code after rerunning.
 
-Table 2  Citeseer
-GraphSGAE 71.00 
-GCN		  71.90  
-GAT		  70.85 
-JK		  71.53 
-GraphDRej  72.58 
+|Table 2 | Citeseer |
+| ------ | ------ |
+|GraphSGAE| 71.00 |
+|GCN		  |71.90|   
+|GAT		  |70.85 |  
+|JK		     |71.53 |   
+|GraphDRej | 72.58 | 
 
 
-Table 3  Citeseer
-GraphSGAE 71.00 
-GCN		  71.90  
-GAT		  70.92  
-JK		  72.20 
-GraphDRej  72.58 
+|Table 3  |Citeseer|
+| ------ | ------ |
+|GraphSGAE |71.00 |
+|GCN		  |71.90  |
+|GAT		  |70.92  |
+|JK		    |72.20 |
+|GraphDRej  |72.58 
 
 
 

@@ -34,52 +34,52 @@ Again, we are sincere to say sorry for our mistakes. Here, we provide the result
 |GCN		  |71.90  |
 |GAT		  |70.92  |
 |JK		    |72.20 |
-|GraphDRej  |72.58 
+|GraphDRej  |72.58|
 
 
 
 # Rebuttal to Review #252757:
 First of all, thank you for your review.
-1.	Thank you for your advice about the improvement of our paper, 1) The motivation of Section 3 “Limitation of Current GNNs” introduced in our paper is to emphasize the limitation of GNNs, and give a friendly understanding of this limitation and the motivation of our paper. There may exist a better way to put this section in a more suitable position. We will polish this content and give a deeper insight to GNNs. 2) The details about experimental setting can be found in the following answering about your four questions, and we will cite these four papers you mentioned in rebuttal.
+1.Thank you for your advice about the improvement of our paper, 1) The motivation of Section 3 “Limitation of Current GNNs” introduced in our paper is to emphasize the limitation of GNNs, and give a friendly understanding of this limitation and the motivation of our paper. There may exist a better way to put this section in a more suitable position. We will polish this content and give a deeper insight to GNNs. 2) The details about experimental setting can be found in the following answering about your four questions, and we will cite these four papers you mentioned in rebuttal.
 
 Here are four answers about your four questions.
+
 1.For the first question, the accuracy on Citeseer reported in our paper, we are sincere to say sorry for our mistakes. Specifically, for the datasets of Citeseer, there are 12 isolated nodes (seeing Line 57-66 in [1]), and the labels of all the isolated nodes are not provided (seeing Line 64-66 in [1], where the label vector of isolated node in “ty_extended” is initialized as a zero vector). In GCN paper or GAT paper, both of them only use 1620 nodes, and ignore the isolated nodes. Thus, we also try to report the results of the non-isolated nodes in Citeseer (total number is 3312=3327-15), and we modify the “load_data” function in [1]. But we mismatch the node feature and the corresponding node labels after deleting the isolated nodes. Thus, there has a huge gap in results.  For other datasets, there has no isolated nodes, and the results are corrected and similar with the results reported in other papers.	
 Some evidences can be helpful to verify what we say. 
 1)The node number (i.e., 3312) of Citeseer reported in our paper is the number referred to the non-isolated nodes.
 2)Due to no isolated nodes in other datasets, there has no addition operation (e.g., deleting and re-matching) in these datasets. Thus, the results of other datasets are similar with the results published in other papers.
 Again, we are sincere to say sorry for our mistakes. Here, we provide the results of Citeseer on Table 2 and Table 3 in our paper, which are obtained from the corrected code after rerunning.
+|Table 2 | Citeseer |
+| ------ | ------ |
+|GraphSGAE| 71.00 |
+|GCN		  |71.90|   
+|GAT		  |70.85 |  
+|JK		     |71.53 |   
+|GraphDRej | 72.58 | 
 
 
-Table 2  Citeseer
-GraphSGAE 71.00 
-GCN		  71.90  
-GAT		  70.85 
-JK		  71.53 
-GraphDRej  72.58 
+|Table 3  |Citeseer|
+| ------ | ------ |
+|GraphSGAE |71.00 |
+|GCN		  |71.90  |
+|GAT		  |70.92  |
+|JK		    |72.20 |
+|GraphDRej  |72.58|
 
+2.For the second question, we randomly select 20% nodes from the rest non-isolated nodes (i.e., 3312 nodes) as training nodes. Due to the randomly sampling, the labeling rate per class is also the same (i.e., 20% per class).  We only use 20% nodes for training. We are sorry we cannot catch the meaning of the question “Do all nodes including unlabeled nodes used for training?”. Here are some explanations which may be helpful. For the unlabeled nodes, on the one hand, as we delete the isolated nodes (i.e., unlabeled nodes), there are no unlabeled nodes left in training set. On the other hand, due to randomly sampling, there may exist a case where there may be no training samples for one particular class, and it may be ok to ignore this problem as we report the mean results through several different random seeds.
 
-Table 3  Citeseer
-GraphSGAE 71.00 
-GCN		  71.90  
-GAT		  70.92  
-JK		  72.20 
-GraphDRej  72.58 
-
-
-2.	For the second question, we randomly select 20% nodes from the rest non-isolated nodes (i.e., 3312 nodes) as training nodes. Due to the randomly sampling, the labeling rate per class is also the same (i.e., 20% per class).  We only use 20% nodes for training. We are sorry we cannot catch the meaning of the question “Do all nodes including unlabeled nodes used for training?”. Here are some explanations which may be helpful. For the unlabeled nodes, on the one hand, as we delete the isolated nodes (i.e., unlabeled nodes), there are no unlabeled nodes left in training set. On the other hand, due to randomly sampling, there may exist a case where there may be no training samples for one particular class, and it may be ok to ignore this problem as we report the mean results through several different random seeds.
-
-3.	For the third question, it is true that the setting is different from other papers, such as split strategy and the embedding dimension. We also notice that the experimental setting may be different in different papers. For example, the paper [3] splits nodes in each graph into 60%, 20% and 20% for training,
+3.For the third question, it is true that the setting is different from other papers, such as split strategy and the embedding dimension. We also notice that the experimental setting may be different in different papers. For example, the paper [3] splits nodes in each graph into 60%, 20% and 20% for training,
 validation and testing, and the paper [4] adopts several different training rates in experiments.
 IMHO, if the experiment setting among all models (including the proposed model and baselines) used in one paper is keeping the same, we can fairly evaluate this work with other baselines. No matter the setting is same from other published paper or not. 
 
-  
 4.For the forth question, on the one hand, it is true that different variants of JK achieve best results in different datasets. But according to the results reported on Citeseer and Cora (similar datasets used in our paper), JK-Concat and JK-Maxpool outperform other baselines in accuracy, and JK-Maxpool has a low standard deviation than JK-Concat. Hence, JK-Maxpool is a more competitive baseline.
 On the other hand, according to the Section 4.1 in [3], compared with other aggregation function, maxpool is more likely to overcome the over-smoothing problem. Thus, considering the property and the performance of maxpool, and the over-smoothing problem analyzed in our paper, we choose maxpool for JK.
 
+5.For your opinion of over-smoothing about GCN, GAT and so on, it is nice to give the “phenomenon” view about over-smoothing. But we may have to admit that, this “problem” or “phenomenon” hurts the performance of GNN when too many layers added. If we can deal with it, a more powerful GNN with deep layers may be obtained.  
 
-5. For your opinion of over-smoothing about GCN, GAT and so on, it is nice to give the “phenomenon” view about over-smoothing. But we may have to admit that, this “problem” or “phenomenon” hurts the performance of GNN when too many layers added. If we can deal with it, a more powerful GNN with deep layers may be obtained.  
-6. The motivation of Section 3 “Limitation of Current GNNs” introduced in our paper is to emphasize the limitation of GNNs, and give a friendly understanding of this limitation and the motivation of our paper. There may exist a better way to put this section in a more suitable position. We will polish this content and give a deeper insight to GNNs
-7. Thank you for your advice on writing, we will polish it in the later version.
+6.The motivation of Section 3 “Limitation of Current GNNs” introduced in our paper is to emphasize the limitation of GNNs, and give a friendly understanding of this limitation and the motivation of our paper. There may exist a better way to put this section in a more suitable position. We will polish this content and give a deeper insight to GNNs
+
+7.Thank you for your advice on writing, we will polish it in the later version.
 
 [1] https://github.com/tkipf/gcn/blob/master/gcn/utils.py  (the official code of GCN)
 [2] https://github.com/tkipf/gcn/tree/master/gcn/data (the official code of GCN)

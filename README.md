@@ -109,7 +109,7 @@ First of all, thank you for your review.
 
 2)A single constant, compared with a vector, is simpler. Considering that a single constant can also well solve the over-smoothing problem, there may be no need to extend to a vector. 
 
-3) Introducing a vector rather a single constant may be more likely to have over-fitting problem. 
+3)Introducing a vector rather a single constant may be more likely to have over-fitting problem. 
 
 4)A single constant has a better interpretability. In other words, the single constant can be taking as a layer-wise punishment strategy where each node is taken as the smallest unit. While, for vector-based methods, the smallest unit is the feature value in each dimension, which mixes the node feature passing in a GNN and losses the interpretability, i.e., the layer-wise punishment.
 
